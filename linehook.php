@@ -14,6 +14,7 @@ foreach ($client->parseEvents() as $event) {
                 case 'text':
                     switch ($message['text']) {
                         case '!whoami':
+                            $profile = $client->profile($event['source']['userId']);
                             $client->replyMessage([
                                 'replyToken' => $event['replyToken'],
                                 'messages' => [

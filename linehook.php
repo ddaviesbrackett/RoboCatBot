@@ -15,12 +15,17 @@ foreach ($client->parseEvents() as $event) {
                     switch ($message['text']) {
                         case '!whoami':
                             $profile = $client->profile($event['source']['userId']);
+                            $msg = 'I\'m not allowed to know who you are until you make friends with me.';
+                            if($profile->displayName != '')
+                            {
+                                $msg =  'you are '. $profile->displayName . ' as far as I can tell!';
+                            }
                             $client->replyMessage([
                                 'replyToken' => $event['replyToken'],
                                 'messages' => [
                                     [
                                         'type' => 'text',
-                                        'text' => 'you are '. $profile->displayName . ' as far as I can tell!'
+                                        'text' => $msg
                                         ]
                                     ]
                                 ]);
